@@ -14,9 +14,8 @@ public class TodoApplication {
     public static final String ENDPOINT_URL = format("http://%s:%d", HOSTNAME, DEFAULT_PORT);
 
     public static void main(String[] args) {
-
-        Repository repository = new InMemoryRepository();
-        TodoServer todoServer = new TodoServer(new TodoController(ENDPOINT_URL, repository));
+        var repository = new InMemoryRepository();
+        var todoServer = new TodoServer(new TodoController(ENDPOINT_URL, repository));
         todoServer.start(DEFAULT_PORT);
     }
 }
