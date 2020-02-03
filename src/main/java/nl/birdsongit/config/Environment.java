@@ -1,5 +1,6 @@
 package nl.birdsongit.config;
 
+import static java.lang.String.format;
 import static java.util.Optional.ofNullable;
 
 public interface Environment {
@@ -11,7 +12,7 @@ public interface Environment {
     static String hostUrl() {
         return ofNullable(System.getenv("DYNO"))
                 .map(url -> HEROKU_URL)
-                .orElse(DEFAULT_URL);
+                .orElse(format("%s:%d", DEFAULT_URL, DEFAULT_PORT));
     }
 
     static Integer port() {
