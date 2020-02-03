@@ -3,14 +3,15 @@ package nl.birdsongit;
 import kong.unirest.Body;
 import kong.unirest.HttpResponse;
 import kong.unirest.Unirest;
+import nl.birdsongit.config.Environment;
 import nl.birdsongit.model.TodoItem;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
 import nl.birdsongit.repositories.InMemoryRepository;
 import nl.birdsongit.repositories.Repository;
 import nl.birdsongit.server.TodoController;
 import nl.birdsongit.server.TodoServer;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
 import java.util.Random;
@@ -21,8 +22,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class TodoApplicationTest {
 
     public static final int RANDOM_PORT = randomPort();
-    private static final String HOSTNAME = "localhost";
-    public static final String ENDPOINT_URL = format("http://%s:%d", HOSTNAME, RANDOM_PORT);
+    public static final String ENDPOINT_URL = format("%s:%d", Environment.hostUrl(), RANDOM_PORT);
     private static TodoServer app;
 
     @BeforeAll
