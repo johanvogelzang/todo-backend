@@ -18,7 +18,7 @@ A Javalin based implementation of the Todo Backend web API spec - for managing a
 </p>
 <p>
   <a href="https://javalin.io">
-    <img src="https://jdbi.org/images/logo.svg" align="left" height="70" width="48">
+    <img src="https://jdbi.org/images/logo.svg" align="left" height="48" width="48">
   </a> A natural Java database interface that is easy to bind to your domain data types
 </p>
 <br>
