@@ -4,7 +4,11 @@ import io.javalin.http.NotFoundResponse;
 import nl.birdsongit.model.TodoItem;
 import nl.birdsongit.repositories.Repository;
 
-import java.util.*;
+import java.util.List;
+import java.util.UUID;
+import java.util.function.Supplier;
+
+import static java.lang.String.format;
 
 public class TodoController {
 
@@ -33,14 +37,16 @@ public class TodoController {
     }
 
     public TodoItem get(String id) {
-        TodoItem todo = repository.get(UUID.fromString(id));
-        if (todo != null) return todo;
-        throw new NotFoundResponse();
+        return repository.get(UUID.fromString(id))
+                .orElseThrow(NotFoundResponse::new);
     }
 
     public TodoItem patch(String id, TodoItem patchItem) {
-        TodoItem todoToPatch = repository.get(UUID.fromString(id));
-        return repository.update(todoToPatch.patchMe(patchItem));
+        TodoItem todoToPatch = this.get(id);
+        if (repository.update(todoToPatch.patchMe(patchItem)) == 1) {
+            return this.get(id);
+        }
+        throw new IllegalStateException(format("Patching of todoItem [%s] not successful", todoToPatch.getId()));
     }
 
     public void delete(String id) {

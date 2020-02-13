@@ -3,6 +3,7 @@ package nl.birdsongit.repositories;
 import nl.birdsongit.model.TodoItem;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public interface Repository {
@@ -13,9 +14,11 @@ public interface Repository {
 
     List<TodoItem> getAll();
 
-    TodoItem get(UUID id);
+    Optional<TodoItem> get(UUID id);
 
-    TodoItem update(TodoItem patchMe);
+    int update(TodoItem todoItem);
 
-    void delete(UUID fromString);
+    void delete(UUID id);
+
+    void migrate();
 }

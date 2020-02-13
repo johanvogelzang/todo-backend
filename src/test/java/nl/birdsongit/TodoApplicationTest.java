@@ -5,7 +5,7 @@ import kong.unirest.HttpResponse;
 import kong.unirest.Unirest;
 import nl.birdsongit.config.Environment;
 import nl.birdsongit.model.TodoItem;
-import nl.birdsongit.repositories.InMemoryRepository;
+import nl.birdsongit.repositories.JdbiRepository;
 import nl.birdsongit.repositories.Repository;
 import nl.birdsongit.server.TodoController;
 import nl.birdsongit.server.TodoServer;
@@ -14,20 +14,20 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
-import java.util.Random;
 
 import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class TodoApplicationTest {
 
-    public static final int RANDOM_PORT = randomPort();
-    public static final String ENDPOINT_URL = format("%s:%d", Environment.hostUrl(), RANDOM_PORT);
+    public static final int RANDOM_PORT = Environment.randomPort();
+    public static final String ENDPOINT_URL = format("http://localhost:%d", RANDOM_PORT);
     private static TodoServer app;
 
     @BeforeAll
     public static void beforeAll(){
-        Repository repository = new InMemoryRepository();
+        Repository repository = new JdbiRepository("jdbc:h2:mem:test;MODE=PostgreSQL;DB_CLOSE_DELAY=-1");
+        repository.migrate();
         app = new TodoServer(new TodoController(ENDPOINT_URL, repository));
         app.start(RANDOM_PORT);
     }
@@ -111,9 +111,5 @@ public class TodoApplicationTest {
 
         assertThat(patchedTodo.getTitle()).isEqualTo("I'm a patched TodoItem");
         assertThat(patchedTodo.getOrder()).isEqualTo(1);
-    }
-
-    private static int randomPort() {
-        return new Random().nextInt((1000)) + 7000;
     }
 }

@@ -4,7 +4,7 @@ import nl.birdsongit.model.TodoItem;
 
 import java.util.*;
 
-public class InMemoryRepository implements Repository {
+public class HashMapRepository implements Repository {
 
     Map<UUID, TodoItem> todoItems = new HashMap<>();
 
@@ -24,21 +24,23 @@ public class InMemoryRepository implements Repository {
     }
 
     @Override
-    public TodoItem get(UUID uuid) {
-        if (todoItems.containsKey(uuid)) {
-            return todoItems.get(uuid);
-        }
-        return null;
+    public Optional<TodoItem> get(UUID id) {
+        return Optional.ofNullable(todoItems.get(id));
     }
 
     @Override
-    public TodoItem update(TodoItem todo) {
-        todoItems.replace(todo.getId(), todo);
-        return todoItems.get(todo.getId());
+    public int update(TodoItem todoItem) {
+        todoItems.replace(todoItem.getId(), todoItem);
+        return 1;
     }
 
     @Override
-    public void delete(UUID uuid) {
-        todoItems.remove(uuid);
+    public void delete(UUID id) {
+        todoItems.remove(id);
+    }
+
+    @Override
+    public void migrate() {
+
     }
 }

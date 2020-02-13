@@ -1,5 +1,7 @@
 package nl.birdsongit.config;
 
+import java.util.Random;
+
 import static java.lang.String.format;
 import static java.util.Optional.ofNullable;
 
@@ -19,5 +21,9 @@ public interface Environment {
         return ofNullable(System.getenv("PORT"))
                 .map(Integer::parseInt)
                 .orElse(DEFAULT_PORT);
+    }
+
+    static int randomPort() {
+        return new Random().nextInt((1000)) + 7000;
     }
 }
