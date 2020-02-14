@@ -1,12 +1,12 @@
 package nl.birdsongit.server;
 
+import io.javalin.http.BadRequestResponse;
 import io.javalin.http.NotFoundResponse;
 import nl.birdsongit.model.TodoItem;
 import nl.birdsongit.repositories.Repository;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.function.Supplier;
 
 import static java.lang.String.format;
 
@@ -37,8 +37,12 @@ public class TodoController {
     }
 
     public TodoItem get(String id) {
-        return repository.get(UUID.fromString(id))
-                .orElseThrow(NotFoundResponse::new);
+        try {
+            return repository.retrieve(UUID.fromString(id))
+                    .orElseThrow(NotFoundResponse::new);
+        } catch (IllegalArgumentException iae) {
+            throw new BadRequestResponse("Not an UUID!") ;
+        }
     }
 
     public TodoItem patch(String id, TodoItem patchItem) {

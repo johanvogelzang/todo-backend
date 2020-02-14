@@ -2,7 +2,7 @@
 A Javalin based implementation of the Todo Backend web API spec - for managing a todo list.
 - No dependency injection framework
 - Low usage of annotations
-- Prepare to see server startup times < 250 ms!
+- Prepare to see server startup times < 200 ms!
 
 ## Used technolgies
 <p>

@@ -24,7 +24,7 @@ public class HashMapRepository implements Repository {
     }
 
     @Override
-    public Optional<TodoItem> get(UUID id) {
+    public Optional<TodoItem> retrieve(UUID id) {
         return Optional.ofNullable(todoItems.get(id));
     }
 

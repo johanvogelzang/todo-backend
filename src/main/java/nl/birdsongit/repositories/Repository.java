@@ -14,7 +14,7 @@ public interface Repository {
 
     List<TodoItem> getAll();
 
-    Optional<TodoItem> get(UUID id);
+    Optional<TodoItem> retrieve(UUID id);
 
     int update(TodoItem todoItem);
 

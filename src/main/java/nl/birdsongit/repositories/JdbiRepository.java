@@ -57,7 +57,7 @@ public class JdbiRepository implements Repository {
     }
 
     @Override
-    public Optional<TodoItem> get(UUID uuid) {
+    public Optional<TodoItem> retrieve(UUID uuid) {
         return jdbi.withHandle(handle -> handle.createQuery("SELECT * from todo WHERE id=:id")
                 .bind("id", uuid)
                 .mapTo(TodoItem.class)
