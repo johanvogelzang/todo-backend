@@ -24,6 +24,6 @@ public interface Environment {
     }
 
     static int randomPort() {
-        return new Random().nextInt((1000)) + 7000;
+        return new Random().nextInt(1000) + 7000;
     }
 }
