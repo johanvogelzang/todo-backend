@@ -16,7 +16,7 @@ A Javalin based implementation of the Todo Backend web API spec - for managing a
       <a href="https://www.java.com">
         <img src="https://upload.wikimedia.org/wikipedia/en/thumb/3/30/Java_programming_language_logo.svg/283px-Java_programming_language_logo.svg.png" style="float: left; padding: 0px 10px 0px 0px;" height="70" width="48">
       </a>
-          Software development platform >= 11 
+          Software development platform 
     </p>
     <p>
       <a href="http://jdbi.org">
@@ -24,6 +24,12 @@ A Javalin based implementation of the Todo Backend web API spec - for managing a
       </a>
           A natural Java database interface that is easy to bind to your domain data types
     </p>
+     <p>
+          <a href="https://flywaydb.org">
+            <img src="https://flywaydb.org/assets/logo/flyway-logo-tm.png" style="float: left; padding: 0px 10px 0px 0px;" height="48" width="48">
+          </a>
+              Version control for the database
+      </p>
 </div>
 
 ## Tests
