@@ -38,9 +38,4 @@ public class HashMapRepository implements Repository {
     public void delete(UUID id) {
         todoItems.remove(id);
     }
-
-    @Override
-    public void migrate() {
-
-    }
 }

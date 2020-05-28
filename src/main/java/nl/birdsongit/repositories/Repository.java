@@ -19,6 +19,4 @@ public interface Repository {
     int update(TodoItem todoItem);
 
     void delete(UUID id);
-
-    void migrate();
 }

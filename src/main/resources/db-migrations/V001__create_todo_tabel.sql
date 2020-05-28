@@ -1,0 +1,1 @@
+CREATE TABLE todo (id UUID PRIMARY KEY, title VARCHAR, completed BOOLEAN, index INTEGER, url VARCHAR);

@@ -22,19 +22,10 @@ public class TodoApplicationTest {
 
     public static final int RANDOM_PORT = Environment.randomPort();
     public static final String ENDPOINT_URL = format("http://localhost:%d", RANDOM_PORT);
-    private static TodoServer app;
 
     @BeforeAll
     public static void beforeAll(){
-        Repository repository = new JdbiRepository("jdbc:h2:mem:test;MODE=PostgreSQL;DB_CLOSE_DELAY=-1");
-        repository.migrate();
-        app = new TodoServer(new TodoController(ENDPOINT_URL, repository));
-        app.start(RANDOM_PORT);
-    }
-
-    @AfterAll
-    public static void afterAll(){
-        app.stop();
+        TodoApplication.main(new String[]{Integer.toString(RANDOM_PORT)});
     }
 
     @Test

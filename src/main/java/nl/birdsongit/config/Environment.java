@@ -10,6 +10,7 @@ public interface Environment {
     int DEFAULT_PORT = 7000;
     String DEFAULT_URL = "http://localhost";
     String HEROKU_URL = "https://javalin-todobackend.herokuapp.com";
+    String DB_URL = "jdbc:h2:mem:test;MODE=PostgreSQL;DB_CLOSE_DELAY=-1";
 
     static String hostUrl() {
         return ofNullable(System.getenv("DYNO"))

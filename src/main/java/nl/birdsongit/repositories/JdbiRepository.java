@@ -23,13 +23,6 @@ public class JdbiRepository implements Repository {
     }
 
     @Override
-    public void migrate() {
-        jdbi.useHandle(handle -> {
-            handle.execute("CREATE TABLE todo (id UUID PRIMARY KEY, title VARCHAR, completed BOOLEAN, index INTEGER, url VARCHAR)");
-        });
-    }
-
-    @Override
     public void save(UUID id, TodoItem todoItem) {
         jdbi.useHandle(handle -> {
             handle.createUpdate("INSERT INTO todo (id, title, completed, index, url) VALUES (:id, :title, :completed, :index, :url)")
