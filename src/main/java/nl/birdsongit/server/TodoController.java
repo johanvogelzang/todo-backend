@@ -12,10 +12,10 @@ import static java.lang.String.format;
 
 public class TodoController {
 
-    Repository repository;
+    Repository<TodoItem> repository;
     private String endpointUrl;
 
-    public TodoController(String endpointUrl, Repository repository) {
+    public TodoController(String endpointUrl, Repository<TodoItem> repository) {
         this.endpointUrl = endpointUrl;
         this.repository = repository;
     }
@@ -24,7 +24,7 @@ public class TodoController {
         var id = UUID.randomUUID();
         todoItem.setId(id)
                 .setUrl(endpointUrl + "/" + id);
-        repository.save(id, todoItem);
+        repository.save(todoItem);
         return todoItem;
     }
 

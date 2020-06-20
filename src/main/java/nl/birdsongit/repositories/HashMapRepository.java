@@ -4,13 +4,13 @@ import nl.birdsongit.model.TodoItem;
 
 import java.util.*;
 
-public class HashMapRepository implements Repository {
+public class HashMapRepository implements Repository<TodoItem> {
 
     Map<UUID, TodoItem> todoItems = new HashMap<>();
 
     @Override
-    public void save(UUID id, TodoItem todoItem) {
-        this.todoItems.put(id, todoItem);
+    public void save(TodoItem todoItem) {
+        this.todoItems.put(todoItem.getId(), todoItem);
     }
 
     @Override

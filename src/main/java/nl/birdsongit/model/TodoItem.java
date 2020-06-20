@@ -11,6 +11,13 @@ public class TodoItem {
 
     private Integer order;
 
+    public TodoItem(UUID uuid) {
+        this.id = uuid;
+    }
+
+    public TodoItem() {
+    }
+
     public TodoItem patchMe(TodoItem patchItem) {
         setTitle(patchItem.getTitle() != null ? patchItem.getTitle() : getTitle());
         setCompleted(patchItem.isCompleted() != null ? patchItem.isCompleted() : isCompleted());

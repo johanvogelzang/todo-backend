@@ -5,11 +5,6 @@ import kong.unirest.HttpResponse;
 import kong.unirest.Unirest;
 import nl.birdsongit.config.Environment;
 import nl.birdsongit.model.TodoItem;
-import nl.birdsongit.repositories.JdbiRepository;
-import nl.birdsongit.repositories.Repository;
-import nl.birdsongit.server.TodoController;
-import nl.birdsongit.server.TodoServer;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -36,7 +31,7 @@ public class TodoApplicationTest {
     }
 
     @Test
-    public void when_todoitem_is_posted_then_the_item_is_returned_and_has_become_a_id_value() {
+    public void when_todoitem_is_posted_then_the_item_is_returned_and_id_has_become_a_value() {
         var todoItem = new TodoItem()
             .setTitle("My todoitem")
             .setCompleted(true)
@@ -47,6 +42,10 @@ public class TodoApplicationTest {
                 .body(todoItem)
                 .asObject(TodoItem.class);
 
+        assertThat(response)
+                .isNotNull()
+                .hasFieldOrProperty("status")
+                .hasFieldOrProperty("body");
         assertThat(response.getStatus()).isEqualTo(200);
         assertThat(response.getBody().getTitle()).isEqualTo("My todoitem");
         assertThat(response.getBody().getId()).isNotNull();

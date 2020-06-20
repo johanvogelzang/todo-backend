@@ -12,8 +12,7 @@ public class TodoMapper implements RowMapper<TodoItem> {
 
     @Override
     public TodoItem map(ResultSet rs, StatementContext ctx) throws SQLException {
-        return new TodoItem()
-                .setId((UUID) rs.getObject("id"))
+        return new TodoItem((UUID) rs.getObject("id"))
                 .setTitle(rs.getString("title"))
                 .setCompleted(rs.getBoolean("completed"))
                 .setOrder(rs.getInt("index"))

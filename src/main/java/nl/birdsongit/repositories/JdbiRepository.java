@@ -9,7 +9,7 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-public class JdbiRepository implements Repository {
+public class JdbiRepository implements Repository<TodoItem> {
 
     Jdbi jdbi;
 
@@ -23,23 +23,20 @@ public class JdbiRepository implements Repository {
     }
 
     @Override
-    public void save(UUID id, TodoItem todoItem) {
-        jdbi.useHandle(handle -> {
-            handle.createUpdate("INSERT INTO todo (id, title, completed, index, url) VALUES (:id, :title, :completed, :index, :url)")
-                    .bind("id", todoItem.getId())
-                    .bind("title", todoItem.getTitle())
-                    .bind("completed", todoItem.isCompleted())
-                    .bind("index", todoItem.getOrder())
-                    .bind("url", todoItem.getUrl())
-                    .execute();
-        });
+    public void save(TodoItem todoItem) {
+        jdbi.useHandle(handle -> handle.createUpdate(
+                "INSERT INTO todo (id, title, completed, index, url) VALUES (:id, :title, :completed, :index, :url)")
+                .bind("id", todoItem.getId())
+                .bind("title", todoItem.getTitle())
+                .bind("completed", todoItem.isCompleted())
+                .bind("index", todoItem.getOrder())
+                .bind("url", todoItem.getUrl())
+                .execute());
     }
 
     @Override
     public void deleteAll() {
-        jdbi.useHandle(handle -> {
-            handle.execute("TRUNCATE TABLE todo");
-        });
+        jdbi.useHandle(handle -> handle.execute("TRUNCATE TABLE todo"));
     }
 
     @Override

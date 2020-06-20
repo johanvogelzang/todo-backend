@@ -1,22 +1,20 @@
 package nl.birdsongit.repositories;
 
-import nl.birdsongit.model.TodoItem;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-public interface Repository {
+public interface Repository<T> {
 
-    void save(UUID id, TodoItem todoItem);
+    void save(T item);
 
     void deleteAll();
 
-    List<TodoItem> getAll();
+    List<T> getAll();
 
-    Optional<TodoItem> retrieve(UUID id);
+    Optional<T> retrieve(UUID id);
 
-    int update(TodoItem todoItem);
+    int update(T item);
 
     void delete(UUID id);
 }
