@@ -2,7 +2,7 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ master ]
+#    branches: [ master ]
   pull_request:
     branches: [ master ]
 
@@ -23,6 +23,7 @@ jobs:
         run: mvn -B package --file pom.xml
 
       - name: Build and Push Docker Image
+        if: github.ref == 'refs/heads/master'
         uses: mr-smithers-excellent/docker-build-push@v5
         with:
           image: johanvogelzang/todo-backend
