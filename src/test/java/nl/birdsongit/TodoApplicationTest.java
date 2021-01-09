@@ -13,7 +13,7 @@ import java.util.Optional;
 import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class TodoApplicationTest {
+class TodoApplicationTest {
 
     public static final int RANDOM_PORT = Environment.randomPort();
     public static final String ENDPOINT_URL = format("http://localhost:%d", RANDOM_PORT);
@@ -24,14 +24,14 @@ public class TodoApplicationTest {
     }
 
     @Test
-    public void GET_to_fetch_info_returns_info() {
+    void GET_to_fetch_info_returns_info() {
         var response = Unirest.get(ENDPOINT_URL + "/info").asString();
         assertThat(response.getStatus()).isEqualTo(200);
         assertThat(response.getBody()).isEqualTo("Yes! Up and running.");
     }
 
     @Test
-    public void when_todoitem_is_posted_then_the_item_is_returned_and_id_has_become_a_value() {
+    void when_todoitem_is_posted_then_the_item_is_returned_and_id_has_become_a_value() {
         var todoItem = new TodoItem()
             .setTitle("My todoitem")
             .setCompleted(true)
@@ -54,14 +54,14 @@ public class TodoApplicationTest {
     }
 
     @Test
-    public void when_delete_is_called_get_returns_an_json_representation_of_empty_array() {
+    void when_delete_is_called_get_returns_an_json_representation_of_empty_array() {
         Unirest.delete(ENDPOINT_URL);
         Optional<Body> response = Unirest.get(ENDPOINT_URL).getBody();
-        assertThat(response).isEqualTo(Optional.empty());
+        assertThat(response).isNotPresent();
     }
 
     @Test
-    public void when_todoitem_is_posted_then_the_item_can_be_fetched_by_its_url() {
+    void when_todoitem_is_posted_then_the_item_can_be_fetched_by_its_url() {
         var todoItem = new TodoItem()
                 .setTitle("Fetch me by url")
                 .setCompleted(true)
@@ -80,7 +80,7 @@ public class TodoApplicationTest {
     }
 
     @Test
-    public void when_todoitem_is_patched_then_it_is_partially_updated() {
+    void when_todoitem_is_patched_then_it_is_partially_updated() {
         var fullTodo = new TodoItem()
                 .setTitle("Todo to patch")
                 .setOrder(1);
